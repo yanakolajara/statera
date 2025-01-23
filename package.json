@@ -1,0 +1,27 @@
+{
+  "name": "statera",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "start:client": "npm --prefix client start",
+    "start:server": "npm --prefix server start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "install:client": "npm --prefix client install",
+    "install:server": "npm --prefix server install",
+    "install:all": "npm install",
+    "db:schema": "psql -U postgres -f server/db/schema.sql",
+    "db:seed": "psql -U postgres -f server/db/seed.sql",
+    "db:reset": "psql -U postgres -f server/db/schema.sql && psql -U postgres -f server/db/seed.sql"
+  },
+  "keywords": [],
+  "author": "Yanako Lajara",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
