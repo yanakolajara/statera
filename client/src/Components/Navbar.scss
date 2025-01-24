@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 17px 49px;
+  gap: 30px;
+  background-color: hsl(0, 0%, 20%);
+  color: white;
+  &__header {
+    display: flex;
+    width: 169px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  &__routes {
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+  &__auth {
+    display: flex;
+    padding: 4px 19px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+  }
+}
