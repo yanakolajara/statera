@@ -8,8 +8,14 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+app.use('/users', require('./controllers/usersController'));
+
 app.get('/', (req, res) => {
-  res.status(200).send({ message: 'Hello World' });
+  res.status(200).json({ message: 'Hello World' });
+});
+
+app.get('*', (req, res) => {
+  res.status(404).json({ error: 'Page not found' });
 });
 
 module.exports = app;

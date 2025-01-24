@@ -4,7 +4,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "db:schema": "psql -U postgres -f db/schema.sql",
+    "db:seed": "psql -U postgres -f db/seed.sql",
+    "db:reset": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql"
   },
   "keywords": [],
   "author": "Yanako Lajara",
@@ -17,5 +20,8 @@
     "morgan": "^1.10.0",
     "pg-promise": "^11.10.2",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
