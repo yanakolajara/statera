@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const { signUp } = useAuth();
@@ -13,6 +14,7 @@ export default function Signup() {
     password: '',
   });
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,9 +23,14 @@ export default function Signup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signUp(formData.email, formData.password);
+    try {
+      await signUp(formData.email, formData.password);
+      navigate('/');
+    } catch (error) {
+      console.error('Error during signup:', error.message);
+    }
   };
 
   const tempStyle = {

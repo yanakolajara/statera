@@ -13,6 +13,10 @@
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
   }
   &__routes {
     flex: 1 0 0;

@@ -1,15 +1,18 @@
 import React from 'react';
-import './Navbar.scss';
 import { useNavigate } from 'react-router-dom';
+import './Navbar.scss';
+import { useAuth } from '../../hooks/useAuth';
 
-export default function Navbar(props) {
-  const { user } = props;
+export default function Navbar() {
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
   return (
     <nav className='navbar'>
-      <h1 className='navbar__header'>Statera</h1>
+      <a className='navbar__header' href='/'>
+        Statera
+      </a>
       <section className='navbar__routes'></section>
       <section className='navbar__auth'>
         {user ? (
