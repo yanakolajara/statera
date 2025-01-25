@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import {
-  getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import firebaseApp from '../firebase/firebaseConfig';
+import auth from '../firebase/firebaseConfig';
 
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const auth = getAuth(firebaseApp);
 
   useEffect(() => {
     console.log('User updated:', user);
@@ -44,8 +41,7 @@ export function useAuth() {
         }
       );
     } catch (error) {
-      console.error('Error signing up:', error);
-      throw error;
+      console.log('Error signing up:', error);
     }
   };
 
