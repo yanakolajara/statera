@@ -1,14 +1,15 @@
 import React from 'react';
 import './Navbar.scss';
 
-export default function Navbar() {
-  const auth = false;
+export default function Navbar(props) {
+  const { user } = props;
+
   return (
     <nav className='navbar'>
       <h1 className='navbar__header'>Statera</h1>
       <section className='navbar__routes'></section>
       <section className='navbar__auth'>
-        {auth ? (
+        {user ? (
           <button className='btn'>Log Out</button>
         ) : (
           <>
