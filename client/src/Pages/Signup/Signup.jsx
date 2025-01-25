@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Signup() {
+  const { signUp } = useAuth();
   const [formData, setFormData] = useState({
     firstName: '',
     middleName: '',
@@ -21,8 +23,7 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log('Signup submitted', formData);
+    signUp(formData.email, formData.password);
   };
 
   const tempStyle = {

@@ -1,30 +1,44 @@
 import React from 'react';
 import './Navbar.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar(props) {
   const { user } = props;
 
+  const navigate = useNavigate();
+
   return (
     <nav className='navbar'>
-      <header className='navbar__header'>
-        <h1>Statera</h1>
-      </header>
+      <h1 className='navbar__header'>Statera</h1>
       <section className='navbar__routes'></section>
       <section className='navbar__auth'>
         {user ? (
-          <i className='navbar__auth__btn btn' href='/'>
-            <span>i</span>
-            <p>Logout</p>
-          </i>
+          <button
+            className='btn'
+            onClick={() => {
+              //TODO signOut();
+            }}
+          >
+            Log Out
+          </button>
         ) : (
           <>
-            <i className='navbar__auth__btn' href='/login'>
+            <button
+              className='btn'
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
               Log In
-            </i>
-            <a className='navbar__auth__btn' href='/signup'>
-              <span>i</span>
-              <p>Sign Up</p>
-            </a>
+            </button>
+            <button
+              className='btn'
+              onClick={() => {
+                navigate('/signup');
+              }}
+            >
+              Sign Up
+            </button>
           </>
         )}
       </section>
