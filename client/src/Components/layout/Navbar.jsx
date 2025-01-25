@@ -4,7 +4,7 @@ import './Navbar.scss';
 import { useAuth } from '../../hooks/useAuth';
 
 export default function Navbar() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Navbar() {
           <button
             className='btn'
             onClick={() => {
-              //TODO signOut();
+              logout();
             }}
           >
             Log Out
