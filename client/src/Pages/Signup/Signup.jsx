@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 export default function Signup() {
   const { signUp } = useAuth();
   const [formData, setFormData] = useState({
-    firstName: '',
-    middleName: '',
-    lastName: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     dob: '',
     gender: '',
     email: '',
@@ -15,6 +15,7 @@ export default function Signup() {
   });
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -26,7 +27,14 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(formData.email, formData.password);
+      await signUp(formData.email, formData.password, {
+        first_name: formData.first_name,
+        middle_name: formData.middle_name,
+        last_name: formData.last_name,
+        dob: formData.dob,
+        gender: formData.gender,
+        email: formData.email,
+      });
       navigate('/');
     } catch (error) {
       console.error('Error during signup:', error.message);
@@ -49,8 +57,8 @@ export default function Signup() {
             <input
               type='text'
               className='form__text first-name'
-              name='firstName'
-              value={formData.firstName}
+              name='first_name'
+              value={formData.first_name}
               onChange={handleChange}
               required
             />
@@ -60,8 +68,8 @@ export default function Signup() {
             <input
               type='text'
               className='form__text middle-name'
-              name='middleName'
-              value={formData.middleName}
+              name='middle_name'
+              value={formData.middle_name}
               onChange={handleChange}
             />
           </label>
@@ -70,8 +78,8 @@ export default function Signup() {
             <input
               type='text'
               className='form__text last-name'
-              name='lastName'
-              value={formData.lastName}
+              name='last_name'
+              value={formData.last_name}
               onChange={handleChange}
               required
             />
