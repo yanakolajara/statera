@@ -1,13 +1,4 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-
-const WelcomePage = () => {
-  const { user } = useAuth();
-
-  if (user) {
-    return <Navigate to='/dashboard' replace />;
-  }
-
+const Welcome = () => {
   return (
     <div>
       <h1>Welcome to the App!</h1>
@@ -16,4 +7,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default Welcome;

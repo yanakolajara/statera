@@ -14,7 +14,6 @@ export default function List(props) {
     <ul className='list' style={style}>
       {transactionsData.map((transaction) => (
         <Transaction
-          key={transaction.id}
           transaction={transaction}
           editTransaction={editTransaction}
           removeTransaction={removeTransaction}

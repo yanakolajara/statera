@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Navbar.scss';
 import { useAuth } from '../../hooks/useAuth';
+import './Navbar.scss';
 
 export default function Navbar() {
   const { user, logout } = useAuth();

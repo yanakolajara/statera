@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  // formatDateToServer,
-  getDate,
-} from '../../../../utils/date.utils';
+import { formatDateToServer, getDate } from '../../../../utils/date.utils';
 import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
 
 const style = {
@@ -18,7 +15,7 @@ export default function TransactionForm(props) {
     description: transaction?.description || '',
     amount: transaction?.amount || '',
     type: transaction?.type || 'expense',
-    date: transaction?.date || getDate(),
+    date: transaction?.date || getDate(), //FIXME: Default date not showing()
     category: transaction?.category || 'Miscellaneous',
   });
 
@@ -32,7 +29,7 @@ export default function TransactionForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(formData);
+    // onSubmit(formData); //FIXME: Edit form
     setFormData({
       description: '',
       amount: '',

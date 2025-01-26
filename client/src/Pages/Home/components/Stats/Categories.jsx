@@ -1,9 +1,9 @@
 import React from 'react';
-import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
-import { calculateTotal } from '../../../../utils/math.utils';
 import { useTransactions } from '../../useTransactions';
+import { calculateTotal } from '../../../../utils/math.utils';
 import { filterByKey } from '../../../../utils/filter.utils';
 import Loading from '../../../../components/ui/Loading';
+import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
 import Category from './Category';
 
 export default function Categories() {

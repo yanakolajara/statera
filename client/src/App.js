@@ -2,15 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
+import Welcome from './pages/Welcome/Welcome';
 import Navbar from './components/layout/Navbar';
-import './App.scss';
-import { useAuth } from './hooks/useAuth';
-import WelcomePage from './pages/Welcome/Welcome';
 import Loading from './components/ui/Loading';
+import { useAuth } from './hooks/useAuth.js';
+import './App.scss';
 
 function App() {
   const { user, loading } = useAuth();
-
   if (loading) {
     return <Loading />;
   }
@@ -21,7 +20,7 @@ function App() {
         {user ? (
           <Route path='/' element={<Home />} />
         ) : (
-          <Route path='/' element={<WelcomePage />} />
+          <Route path='/' element={<Welcome />} />
         )}
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />

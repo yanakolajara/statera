@@ -4,27 +4,19 @@ import { getDate } from '../../../../utils/date.utils';
 
 const style = {
   display: 'flex',
-  'flex-direction': 'row',
-  'justify-content': 'space-between',
-  'align-items': 'center',
-  'padding-bottom': '1rem',
-  'margin-bottom': '1rem',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingBottom: '1rem',
+  marginBottom: '1rem',
 };
 export default function Transaction(props) {
-  const { key, transaction, editTransaction, removeTransaction } = props;
-  const {
-    id,
-    // user_id,
-    amount,
-    type,
-    category,
-    description,
-    date,
-  } = transaction;
+  const { transaction, editTransaction, removeTransaction } = props;
+  const { id, amount, type, category, description, date } = transaction;
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <li key={key} className='transaction' style={style}>
+    <li className='transaction' style={style}>
       {isEditing ? (
         <TransactionForm
           transaction={transaction}
