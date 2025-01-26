@@ -5,13 +5,13 @@
   padding: 30px;
   margin: 0px;
   align-items: center;
-  .date {
-    &__selector {
+  .time-filter {
+    .time-selector {
       display: flex;
       align-items: center;
       gap: 30px;
     }
-    &__frequency {
+    .filter {
       display: flex;
     }
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Timeframe from './Date';
+import TimeFilter from './TimeFilter';
 import Transactions from './Transactions';
 import Stats from './Stats';
 import './Home.scss';
@@ -7,7 +7,7 @@ import './Home.scss';
 export default function Home() {
   return (
     <main className='home'>
-      <Timeframe />
+      <TimeFilter />
       <section className='dashboard'>
         <Transactions />
         <Stats />
