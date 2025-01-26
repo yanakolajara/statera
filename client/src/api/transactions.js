@@ -21,8 +21,8 @@ export const getUserTransactions = (userId) =>
       throw error.response?.data || error.message;
     });
 
-export const createTransaction = (transactionData) =>
-  AxiosInstance.post('/transactions', transactionData)
+export const createTransaction = (userId, transactionData) =>
+  AxiosInstance.post(`/transactions/${userId}`, transactionData)
     .then((response) => response.data)
     .catch((error) => {
       throw error.response?.data || error.message;

@@ -41,8 +41,9 @@ router.get('/user/:userId', async (req, res) => {
 });
 
 // Create a new transaction
-router.post('/', async (req, res) => {
-  const { userId, amount, type, category, description, date } = req.body;
+router.post('/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { amount, type, category, description, date } = req.body;
   try {
     const data = await db.one(
       'INSERT INTO transactions (user_id, amount, type, category, description, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
