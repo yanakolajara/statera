@@ -12,8 +12,15 @@ const style = {
 };
 export default function Transaction(props) {
   const { key, transaction, editTransaction, removeTransaction } = props;
-  const { id, user_id, amount, type, category, description, date } =
-    transaction;
+  const {
+    id,
+    // user_id,
+    amount,
+    type,
+    category,
+    description,
+    date,
+  } = transaction;
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -29,11 +36,13 @@ export default function Transaction(props) {
         />
       ) : (
         <>
-          <span className='transaction__icon'>Icon</span>
+          <span className='transaction__icon'>{category}</span>
           <div className='transaction__data'>
             <h3>{description}</h3>
             <p>{getDate(date)}</p>
-            <p>${amount}</p>
+            <p style={{ color: type === 'expense' ? 'red' : 'green' }}>
+              ${amount}
+            </p>
           </div>
           <div className='transaction__options'>
             <button className='edit btn' onClick={() => setIsEditing(true)}>

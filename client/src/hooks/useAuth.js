@@ -11,7 +11,7 @@ import {
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [setCookie, removeCookie] = useCookies(['user']);
 
   useEffect(() => {
     const unsubscribe = initializeAuthListener((firebaseUser) => {

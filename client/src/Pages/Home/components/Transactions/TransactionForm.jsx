@@ -1,5 +1,8 @@
 import React from 'react';
-import { formatDateToServer, getDate } from '../../../../utils/date.utils';
+import {
+  // formatDateToServer,
+  getDate,
+} from '../../../../utils/date.utils';
 import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
 
 const style = {

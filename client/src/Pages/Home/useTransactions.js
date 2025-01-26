@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import {
-  getAllTransactions,
+  // getAllTransactions,
   getUserTransactions,
   createTransaction,
   updateTransaction,
@@ -32,6 +32,7 @@ export function useTransactions() {
       console.log('Fetch!');
       fetchTransactions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const addTransaction = (transactionData) => {
