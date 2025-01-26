@@ -6,7 +6,6 @@ import Category from './Category';
 export default function Stats() {
   return (
     <article className='stats'>
-      <h2>Spendings</h2>
       <Chart />
       <Categories>
         <Category />
