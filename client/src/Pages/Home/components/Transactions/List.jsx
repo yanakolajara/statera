@@ -1,6 +1,6 @@
 import React from 'react';
-import Transaction from './Transaction';
-import Loading from '../../../../components/ui/Loading';
+import Transaction from './Transaction.jsx';
+import Loading from '../../../../components/ui/Loading.jsx';
 
 const style = {};
 export default function List(props) {

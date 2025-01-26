@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchBar from './SearchBar';
-import List from './List';
-import TransactionForm from './TransactionForm';
+import SearchBar from './SearchBar.jsx';
+import List from './List.jsx';
+import TransactionForm from './TransactionForm.jsx';
 import { useTransactions } from '../../useTransactions';
 
 export default function Transactions() {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Filter from './Filter';
-import TimeSelector from './TimeSelector';
+import Filter from './Filter.jsx';
+import TimeSelector from './TimeSelector.jsx';
 
 export default function TimeFilter() {
   return (
