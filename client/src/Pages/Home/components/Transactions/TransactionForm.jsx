@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatDateToServer, getDate } from '../../../../utils/date.utils';
+import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
 
 const style = {
   display: 'block',
@@ -38,20 +39,6 @@ export default function TransactionForm(props) {
     });
   }
 
-  const categories = [
-    'Housing',
-    'Transportation',
-    'Food',
-    'Utilities',
-    'Healthcare',
-    'Entertainment',
-    'Shopping',
-    'Education',
-    'Debt Payments',
-    'Savings/Investments',
-    'Miscellaneous',
-  ];
-
   return (
     <form style={style} onSubmit={handleSubmit}>
       {onCancel && (
@@ -74,7 +61,7 @@ export default function TransactionForm(props) {
         placeholder='Amount'
       />
       <select name='category' value={formData.category} onChange={handleChange}>
-        {categories.map((category) => (
+        {TRANSACTION_CATEGORIES.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>
