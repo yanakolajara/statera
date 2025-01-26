@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchBar from './Transactions/SearchBar';
-import List from './Transactions/List';
-import NewTransaction from './Transactions/NewTransaction';
+import SearchBar from './SearchBar';
+import List from './List';
+import NewTransaction from './NewTransaction';
 
 export default function Transactions() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import Chart from './Stats/Chart';
-import Categories from './Stats/Categories';
-import Category from './Stats/Category';
+import Chart from './Chart';
+import Categories from './Categories';
+import Category from './Category';
 
 export default function Stats() {
   return (
