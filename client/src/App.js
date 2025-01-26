@@ -7,12 +7,13 @@ import Navbar from './components/layout/Navbar';
 import './App.scss';
 import { useAuth } from './hooks/useAuth';
 import WelcomePage from './pages/Welcome/Welcome';
+import Loading from './components/ui/Loading';
 
 function App() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <div className='App'>
