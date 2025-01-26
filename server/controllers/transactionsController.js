@@ -40,6 +40,22 @@ router.get('/user/:userId', async (req, res) => {
   }
 });
 
+// Get user transactions by date range
+router.get('/user/:userId/date-range', async (req, res) => {
+  const { userId } = req.params;
+  const { start_date, end_date } = req.query;
+
+  try {
+    const data = await db.manyOrNone(
+      'SELECT * FROM transactions WHERE user_id = $1 AND date BETWEEN $2 AND $3 ORDER BY date ASC',
+      [userId, start_date, end_date]
+    );
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Create a new transaction
 router.post('/:userId', async (req, res) => {
   const { userId } = req.params;
