@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Form from '../../components/ui/Form';
+import { SIGNUP_FIELDS } from '../../constants/formFields';
 
 export default function Signup() {
   const { signUp } = useAuth();
@@ -40,7 +41,9 @@ export default function Signup() {
       });
 
       if (result.success) {
-        alert('A verification link has been sent to your email. Please verify your account before logging in.');
+        alert(
+          'A verification link has been sent to your email. Please verify your account before logging in.'
+        );
         navigate('/login');
       } else {
         alert(result.error);
@@ -107,7 +110,7 @@ export default function Signup() {
       <section className='signup-container'>
         <h1 className='signup-title'>Signup</h1>
         <Form
-          fields={fields}
+          fields={SIGNUP_FIELDS}
           values={formData}
           onChange={handleChange}
           onSubmit={handleSubmit}
