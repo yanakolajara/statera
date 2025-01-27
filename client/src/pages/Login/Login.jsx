@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Form from '../../components/ui/Form';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Login() {
   const { signIn } = useAuth();
@@ -21,14 +22,18 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const loadingToast = toast.loading('Signing in...');
+
     try {
       const result = await signIn(formData.email, formData.password);
       if (result.success) {
+        toast.success('Successfully logged in!', { id: loadingToast });
         navigate('/');
       } else {
-        alert(result.error);
+        toast.error(result.error || 'Login failed', { id: loadingToast });
       }
     } catch (error) {
+      toast.error('An unexpected error occurred', { id: loadingToast });
       console.error('Login failed:', error.message);
     }
   };
@@ -52,6 +57,7 @@ function Login() {
 
   return (
     <main className='login'>
+      <Toaster position='top-center' />
       <section className='login-container'>
         <h1 className='login-title'>Login</h1>
         <Form
