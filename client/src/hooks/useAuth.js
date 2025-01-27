@@ -1,88 +1,81 @@
 import { useState, useEffect } from 'react';
-// import { useCookies } from 'react-cookie';
-import { createUser, updateUser } from '../api/users';
+import { createUser } from '../api/users';
 import {
   firebaseSignIn,
   firebaseSignUp,
   firebaseSignOut,
   initializeAuthListener,
+  completeMFAEnrollment,
 } from '../firebase/auth';
 
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [setCookie, removeCookie] = useCookies(['user']);
+  const [verificationId, setVerificationId] = useState(null);
 
-  useEffect(
-    () => {
-      const unsubscribe = initializeAuthListener((firebaseUser) => {
-        if (firebaseUser) {
-          setUser(firebaseUser);
-          // setCookie('user', JSON.stringify(firebaseUser), {
-          //   path: '/',
-          //   maxAge: 604800,
-          // });
-        } else {
-          setUser(null);
-          // removeCookie('user', { path: '/' });
-        }
-        setLoading(false);
-      });
+  useEffect(() => {
+    const unsubscribe = initializeAuthListener((firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
 
-      return () => {
-        unsubscribe();
-      };
-    },
-    [
-      // setCookie,
-      // removeCookie
-    ]
-  );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const signIn = async (email, password) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const firebaseUser = await firebaseSignIn(email, password);
-      setUser(firebaseUser);
-      // setCookie('user', JSON.stringify(firebaseUser), {
-      //   path: '/',
-      //   maxAge: 604800,
-      // });
+      const userCredentials = await firebaseSignIn(email, password);
+      setUser(userCredentials);
       setLoading(false);
     } catch (error) {
-      console.error('Error signing in:', error);
       setLoading(false);
       throw error;
     }
   };
 
   const signUp = async (email, password, userData) => {
+    console.log('userData', userData);
+    setLoading(true);
     try {
-      setLoading(true);
-      const firebaseUser = await firebaseSignUp(email, password);
-      const dbUser = await createUser({
-        id: firebaseUser.uid,
+      const userCredentials = await firebaseSignUp(email, password, userData);
+      setUser(userCredentials);
+      // setVerificationId(verId);
+      console.log(userCredentials);
+      await createUser({
+        id: userCredentials.uid,
         ...userData,
       });
-
-      setUser({ ...firebaseUser, dbData: dbUser });
-      // setCookie('user', JSON.stringify({ ...firebaseUser, dbData: dbUser }), {
-      //   path: '/',
-      //   maxAge: 604800,
-      // });
-      setLoading(false);
     } catch (error) {
       console.error('Error signing up:', error);
       setLoading(false);
+      throw error;
     }
   };
+
+  // const completeMFASetup = async (verificationCode) => {
+  //   try {
+  //     setLoading(true);
+  //     await completeMFAEnrollment(user, verificationId, verificationCode);
+  //     setVerificationId(null);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     throw error;
+  //   }
+  // };
 
   const logout = async () => {
     try {
       setLoading(true);
       await firebaseSignOut();
       setUser(null);
-      // removeCookie('user', { path: '/' });
       setLoading(false);
     } catch (error) {
       console.error('Error signing out:', error);
@@ -90,40 +83,13 @@ export function useAuth() {
     }
   };
 
-  // const updateUserProfile = async (userId, userData) => {
-  //   try {
-  //     setLoading(true);
-  //     const updatedUser = await updateUser(userId, userData);
-  //     setUser((currentUser) => ({
-  //       ...currentUser,
-  //       dbData: updatedUser,
-  //     }));
-  //     setCookie(
-  //       'user',
-  //       JSON.stringify({
-  //         ...user,
-  //         dbData: updatedUser,
-  //       }),
-  //       {
-  //         path: '/',
-  //         maxAge: 604800,
-  //       }
-  //     );
-  //     setLoading(false);
-  //     return updatedUser;
-  //   } catch (error) {
-  //     console.error('Error updating user:', error);
-  //     setLoading(false);
-  //     throw error;
-  //   }
-  // }
-
   return {
     user,
     loading,
     signIn,
     signUp,
     logout,
-    // updateUserProfile,
+    // completeMFASetup,
+    verificationId,
   };
 }
