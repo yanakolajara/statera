@@ -11,6 +11,7 @@ export default function Signup() {
     dob: '',
     gender: '',
     email: '',
+    phone: '',
     password: '',
   });
 
@@ -31,13 +32,14 @@ export default function Signup() {
         first_name: formData.first_name,
         middle_name: formData.middle_name,
         last_name: formData.last_name,
+        email: formData.email,
+        phone: formData.phone,
         dob: formData.dob,
         gender: formData.gender,
-        email: formData.email,
       });
       navigate('/');
     } catch (error) {
-      console.error('Error during signup:', error.message);
+      alert(error.message);
     }
   };
 
@@ -95,6 +97,19 @@ export default function Signup() {
               required
             />
           </label>
+
+          <label>
+            Phone
+            <input
+              type='phone'
+              className='form__text phone'
+              name='phone'
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </label>
+
           <label>
             Email
             <input

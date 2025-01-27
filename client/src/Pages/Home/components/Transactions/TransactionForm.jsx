@@ -29,7 +29,7 @@ export default function TransactionForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // onSubmit(formData); //FIXME: Edit form
+    onSubmit(formData);
     setFormData({
       description: '',
       amount: '',
@@ -52,6 +52,7 @@ export default function TransactionForm(props) {
         value={formData.description}
         onChange={handleChange}
         placeholder='Add a description'
+        required
       />
       <input
         type='number'
@@ -59,15 +60,26 @@ export default function TransactionForm(props) {
         value={formData.amount}
         onChange={handleChange}
         placeholder='Amount'
+        required
       />
-      <select name='category' value={formData.category} onChange={handleChange}>
+      <select
+        name='category'
+        value={formData.category}
+        onChange={handleChange}
+        required
+      >
         {TRANSACTION_CATEGORIES.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>
         ))}
       </select>
-      <select name='type' value={formData.type} onChange={handleChange}>
+      <select
+        name='type'
+        value={formData.type}
+        onChange={handleChange}
+        required
+      >
         <option value='income'>Income</option>
         <option value='expense'>Expense</option>
       </select>
@@ -76,6 +88,7 @@ export default function TransactionForm(props) {
         name='date'
         value={formData.date}
         onChange={handleChange}
+        required
       />
       <input type='submit' value='submit' />
     </form>
