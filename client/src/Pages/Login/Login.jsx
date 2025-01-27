@@ -22,8 +22,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signIn(formData.email, formData.password);
-      navigate('/');
+      const result = await signIn(formData.email, formData.password);
+      if (result.success) {
+        navigate('/');
+      } else {
+        alert(result.error);
+      }
     } catch (error) {
       console.error('Login failed:', error.message);
     }

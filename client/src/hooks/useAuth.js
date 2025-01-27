@@ -31,31 +31,35 @@ export function useAuth() {
   const signIn = async (email, password) => {
     setLoading(true);
     try {
-      const userCredentials = await firebaseSignIn(email, password);
-      setUser(userCredentials);
+      const cred = await firebaseSignIn(email, password);
+      if (!cred.emailVerified) {
+        await firebaseSignOut();
+        alert('Please verify your email before signing in.');
+        return { success: false, error: 'Email not verified' };
+      } else {
+        setUser(cred);
+        return { success: true };
+      }
+    } catch (e) {
+      return { success: false, error: e.message };
+    } finally {
       setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      throw error;
     }
   };
 
   const signUp = async (email, password, userData) => {
-    console.log('userData', userData);
     setLoading(true);
     try {
-      const userCredentials = await firebaseSignUp(email, password, userData);
-      setUser(userCredentials);
-      // setVerificationId(verId);
-      console.log(userCredentials);
+      const cred = await firebaseSignUp(email, password);
       await createUser({
-        id: userCredentials.uid,
         ...userData,
+        id: cred.uid,
       });
-    } catch (error) {
-      console.error('Error signing up:', error);
+      return { success: true };
+    } catch (e) {
+      return { success: false, error: e.message };
+    } finally {
       setLoading(false);
-      throw error;
     }
   };
 

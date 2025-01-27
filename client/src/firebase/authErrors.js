@@ -1,7 +1,7 @@
 export const firebaseAuthErrors = {
   'auth/invalid-email': 'Invalid email format',
   'auth/wrong-password': 'Incorrect password',
-  'auth/user-not-found': 'No account found with this email',
+  'auth/invalid-credential': 'Invalid credential',
   'auth/weak-password': 'Password should be at least 6 characters',
   'auth/email-already-in-use': 'An account already exists with this email',
   'auth/operation-not-allowed':

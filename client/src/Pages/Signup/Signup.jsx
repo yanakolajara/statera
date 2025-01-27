@@ -29,7 +29,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(formData.email, formData.password, {
+      const result = await signUp(formData.email, formData.password, {
         first_name: formData.first_name,
         middle_name: formData.middle_name,
         last_name: formData.last_name,
@@ -38,9 +38,16 @@ export default function Signup() {
         dob: formData.dob,
         gender: formData.gender,
       });
-      navigate('/');
+
+      if (result.success) {
+        alert('A verification link has been sent to your email. Please verify your account before logging in.');
+        navigate('/login');
+      } else {
+        alert(result.error);
+      }
     } catch (error) {
-      alert(error.message);
+      // This will only run if there's an unexpected error
+      alert('An unexpected error occurred. Please try again later.');
     }
   };
 
