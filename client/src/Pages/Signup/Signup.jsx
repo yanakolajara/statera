@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Form from '../../components/ui/Form';
 
 export default function Signup() {
   const { signUp } = useAuth();
@@ -43,97 +44,69 @@ export default function Signup() {
     }
   };
 
-  const tempStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  };
+  const fields = [
+    {
+      type: 'text',
+      name: 'first_name',
+      label: 'First name',
+      placeholder: 'Enter your first name',
+      required: true,
+    },
+    {
+      type: 'text',
+      name: 'middle_name',
+      label: 'Middle name',
+      placeholder: 'Enter your middle name',
+      required: false,
+    },
+    {
+      type: 'text',
+      name: 'last_name',
+      label: 'Last name',
+      placeholder: 'Enter your last name',
+      required: true,
+    },
+    {
+      type: 'date',
+      name: 'dob',
+      label: 'Date of Birth',
+      required: true,
+    },
+    {
+      type: 'text',
+      name: 'phone',
+      label: 'Phone',
+      placeholder: 'Enter your phone number',
+      required: true,
+    },
+    {
+      type: 'email',
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Enter your email',
+      required: true,
+    },
+    {
+      type: 'password',
+      name: 'password',
+      label: 'Password',
+      placeholder: 'Enter your password',
+      required: true,
+    },
+  ];
 
   return (
     <main className='signup'>
       <section className='signup-container'>
         <h1 className='signup-title'>Signup</h1>
-        <form style={tempStyle} onSubmit={handleSubmit}>
-          <label>
-            First name
-            <input
-              type='text'
-              className='form__text first-name'
-              name='first_name'
-              value={formData.first_name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Middle name
-            <input
-              type='text'
-              className='form__text middle-name'
-              name='middle_name'
-              value={formData.middle_name}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Last name
-            <input
-              type='text'
-              className='form__text last-name'
-              name='last_name'
-              value={formData.last_name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Date of Birth
-            <input
-              type='date'
-              className='form__date dob'
-              name='dob'
-              value={formData.dob}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Phone
-            <input
-              type='phone'
-              className='form__text phone'
-              name='phone'
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Email
-            <input
-              type='email'
-              className='form__text email'
-              name='email'
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type='password'
-              className='form__text password'
-              name='password'
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <input className='form__submit' type='submit' value='Sign Up' />
-        </form>
+        <Form
+          fields={fields}
+          values={formData}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          submitText='Sign Up'
+          showSocialLogin={true}
+        />
       </section>
     </main>
   );

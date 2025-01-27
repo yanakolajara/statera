@@ -40,7 +40,10 @@ export default function TransactionForm(props) {
   }
 
   return (
-    <form style={style} onSubmit={handleSubmit}>
+    <form
+      className={`transaction__form ${onCancel ? 'edit' : 'create'}`}
+      onSubmit={handleSubmit}
+    >
       {onCancel && (
         <button type='button' onClick={onCancel}>
           Cancel

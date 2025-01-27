@@ -1,36 +1,65 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Form from '../../components/ui/Form';
 
 function Login() {
   const { signIn } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await signIn(email, password);
+      await signIn(formData.email, formData.password);
       navigate('/');
     } catch (error) {
       console.error('Login failed:', error.message);
     }
   };
 
+  const fields = [
+    {
+      type: 'email',
+      name: 'email',
+      label: 'Email',
+      placeholder: 'Enter your email',
+      required: true,
+    },
+    {
+      type: 'password',
+      name: 'password',
+      label: 'Password',
+      placeholder: 'Enter your password',
+      required: true,
+    },
+  ];
+
   return (
-    <div>
-      <input
-        type='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+    <main className='login'>
+      <section className='login-container'>
+        <h1 className='login-title'>Login</h1>
+        <Form
+          fields={fields}
+          values={formData}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          submitText='Login'
+          showSocialLogin={true}
+        />
+      </section>
+    </main>
   );
 }
 

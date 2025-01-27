@@ -28,13 +28,15 @@ export default function Transaction(props) {
         />
       ) : (
         <>
-          <span className='transaction__icon'>{category}</span>
+          <span className='transaction__icon'></span>
           <div className='transaction__data'>
-            <h3>{description}</h3>
-            <p>{getDate(date)}</p>
-            <p style={{ color: type === 'expense' ? 'red' : 'green' }}>
-              ${amount}
-            </p>
+            <div className='info'>
+              <h3 className='description'>{description}</h3>
+              <p className='date'>{getDate(date)}</p>
+            </div>
+            <div className='amount'>
+              <p className={`${amount ? 'positive' : 'negative'}`}>${amount}</p>
+            </div>
           </div>
           <div className='transaction__options'>
             <button className='edit btn' onClick={() => setIsEditing(true)}>

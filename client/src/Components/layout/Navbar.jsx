@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+
+import { ReactComponent as LoginIcon } from '../../assets/icons/login.svg';
+
 import './Navbar.scss';
 
 export default function Navbar() {
@@ -10,37 +13,23 @@ export default function Navbar() {
 
   return (
     <nav className='navbar'>
-      <a className='navbar__header' href='/'>
+      <a className='navbar__header txt' href='/'>
         Statera
       </a>
       <section className='navbar__routes'></section>
       <section className='navbar__auth'>
         {user ? (
-          <button
-            className='btn'
-            onClick={() => {
-              logout();
-            }}
-          >
+          <button className='btn txt' onClick={() => logout()}>
+            <LoginIcon />
             Log Out
           </button>
         ) : (
           <>
-            <button
-              className='btn'
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              Log In
+            <button className='btn txt' onClick={() => navigate('/login')}>
+              <LoginIcon /> Log In
             </button>
-            <button
-              className='btn'
-              onClick={() => {
-                navigate('/signup');
-              }}
-            >
-              Sign Up
+            <button className='btn txt' onClick={() => navigate('/signup')}>
+              <LoginIcon /> Sign Up
             </button>
           </>
         )}

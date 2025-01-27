@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './SearchBar.jsx';
+import Searchbar from '../../../../components/ui/Searchbar.jsx';
 import List from './List.jsx';
 import TransactionForm from './TransactionForm.jsx';
 import { useTransactions } from '../../useTransactions';
@@ -13,9 +13,9 @@ export default function Transactions() {
     removeTransaction,
   } = useTransactions();
   return (
-    <article className='transactions'>
+    <article className='transactions container'>
       <h2>Transactions</h2>
-      <SearchBar />
+      <Searchbar />
       <TransactionForm onSubmit={addTransaction} />
       <List
         isLoading={isLoading}
