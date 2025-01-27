@@ -1,12 +1,9 @@
 import React from 'react';
-import { formatDateToServer, getDate } from '../../../../utils/date.utils';
+import {
+  // formatDateToServer,
+  getDate,
+} from '../../../../utils/date.utils';
 import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
-
-const style = {
-  display: 'block',
-  border: '1px solid black',
-  margin: '1rem',
-};
 
 export default function TransactionForm(props) {
   console.log(props);

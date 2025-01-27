@@ -5,13 +5,13 @@ import {
   firebaseSignUp,
   firebaseSignOut,
   initializeAuthListener,
-  completeMFAEnrollment,
+  // completeMFAEnrollment,
 } from '../firebase/auth';
 
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [verificationId, setVerificationId] = useState(null);
+  // const [verificationId, setVerificationId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = initializeAuthListener((firebaseUser) => {
@@ -94,6 +94,6 @@ export function useAuth() {
     signUp,
     logout,
     // completeMFASetup,
-    verificationId,
+    // verificationId,
   };
 }

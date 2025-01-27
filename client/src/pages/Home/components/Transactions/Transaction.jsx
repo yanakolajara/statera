@@ -12,7 +12,14 @@ const style = {
 };
 export default function Transaction(props) {
   const { transaction, editTransaction, removeTransaction } = props;
-  const { id, amount, type, category, description, date } = transaction;
+  const {
+    id,
+    amount,
+    type,
+    // category,
+    description,
+    date,
+  } = transaction;
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -35,7 +42,9 @@ export default function Transaction(props) {
               <p className='date'>{getDate(date)}</p>
             </div>
             <div className='amount'>
-              <p className={`${amount ? 'positive' : 'negative'}`}>${amount}</p>
+              <p className={`${type === 'income' ? 'positive' : 'negative'}`}>
+                ${amount}
+              </p>
             </div>
           </div>
           <div className='transaction__options'>
