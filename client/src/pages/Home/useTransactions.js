@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { useDate } from '../../hooks/useDate';
 import {
   // getAllTransactions,
   getUserTransactions,
@@ -12,6 +13,13 @@ export function useTransactions() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
+  const {
+    dateRange,
+    goToPreviousMonth,
+    goToNextMonth,
+    resetToCurrentMonth,
+    isWithinRange,
+  } = useDate();
 
   const fetchTransactions = () => {
     setLoading(true);
@@ -84,12 +92,20 @@ export function useTransactions() {
       .finally(() => setLoading(false));
   };
 
+  const filteredTransactions = transactions.filter((transaction) =>
+    isWithinRange(transaction.date)
+  );
+
   return {
-    transactions,
+    transactions: filteredTransactions,
     loading,
     addTransaction,
     editTransaction,
     removeTransaction,
     refreshTransactions: fetchTransactions,
+    goToPreviousMonth,
+    goToNextMonth,
+    resetToCurrentMonth,
+    dateRange,
   };
 }
