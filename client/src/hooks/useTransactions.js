@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addMonths, subMonths } from 'date-fns';
+import { addMonths, format, subMonths } from 'date-fns';
 import { useAuth } from './useAuth';
 import {
   getUserTransactions,
@@ -25,7 +25,10 @@ export function useTransactions() {
 
   const fetchTransactions = () => {
     setLoading(true);
-    const { startDate, endDate } = getMonthRange(selectedDate);
+
+    const dates = getMonthRange(selectedDate);
+    const startDate = format(dates[0], 'yyyy-MM-dd');
+    const endDate = format(dates[1], 'yyyy-MM-dd');
     return getUserTransactions(user.uid, startDate, endDate)
       .then((data) => setTransactions(data))
       .catch((err) => console.error(err))

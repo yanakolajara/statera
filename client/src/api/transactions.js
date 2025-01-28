@@ -14,8 +14,10 @@ export const getTransaction = (transactionId) =>
       throw error.response?.data || error.message;
     });
 
-export const getUserTransactions = (userId) =>
-  AxiosInstance.get(`/transactions/user/${userId}`)
+export const getUserTransactions = (userId, startDate, endDate) =>
+  AxiosInstance.get(
+    `transactions/user/${userId}/date-range?start_date=${startDate}&end_date=${endDate}`
+  )
     .then((response) => response.data)
     .catch((error) => {
       throw error.response?.data || error.message;
