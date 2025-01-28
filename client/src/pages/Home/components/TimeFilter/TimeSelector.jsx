@@ -1,34 +1,18 @@
 import React, { useEffect } from 'react';
 import { format } from 'date-fns';
 
-export default function TimeSelector({
-  currentDate,
-  moveDatePrev,
-  moveDateNext,
-}) {
-  const handleClick = (e) => {
-    const { name } = e.target;
-    console.log(name);
-    if (name === 'move-prev') {
-      console.log('BACK');
-      moveDatePrev();
-    } else {
-      console.log('NEXT');
-      moveDateNext();
-    }
-  };
-
+export default function TimeSelector({ selectedDate, prevMonth, nextMonth }) {
   useEffect(() => {
-    console.log('CURRENT DATE', currentDate);
-  }, [currentDate]);
+    console.log('CURRENT DATE', selectedDate);
+  }, [selectedDate]);
 
   return (
     <section className='time-selector'>
-      <button name='move-prev' className='time-btn' onClick={handleClick}>
+      <button name='move-prev' className='time-btn' onClick={prevMonth}>
         ⬅️
       </button>
-      <h2>{format(currentDate, 'MMMM')}</h2>
-      <button name='move-next' className='time-btn' onClick={handleClick}>
+      <h2>{format(selectedDate, 'MMMM')}</h2>
+      <button name='move-next' className='time-btn' onClick={nextMonth}>
         ➡️
       </button>
     </section>

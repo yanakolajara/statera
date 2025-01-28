@@ -1,48 +1,36 @@
 import { useState, useEffect } from 'react';
+import { addMonths, subMonths } from 'date-fns';
 import { useAuth } from './useAuth';
-import { useDate } from './useDate';
 import {
-  // getAllTransactions,
   getUserTransactions,
   createTransaction,
   updateTransaction,
   deleteTransaction,
 } from '../api/transactions';
+import { getMonthRange } from '../utils/date.utils';
 
 export function useTransactions() {
+  const { user } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
-  const {
-    dateRange,
-    goToPreviousMonth,
-    goToNextMonth,
-    resetToCurrentMonth,
-    isWithinRange,
-  } = useDate();
-
-  const fetchTransactions = () => {
-    setLoading(true);
-    return getUserTransactions(user.uid)
-      .then((data) => {
-        console.log(data);
-        setTransactions(data);
-        console.log(transactions);
-      })
-      .catch((err) => {
-        console.error(err);
-        setTransactions([]);
-      })
-      .finally(() => setLoading(false));
-  };
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     if (user) {
-      console.log('Fetch!');
-      fetchTransactions();
+      fetchTransactions().then(() => {
+        console.log(transactions);
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, selectedDate]); // Add selectedDate as dependency
+
+  const fetchTransactions = () => {
+    setLoading(true);
+    const { startDate, endDate } = getMonthRange(selectedDate);
+    return getUserTransactions(user.uid, startDate, endDate)
+      .then((data) => setTransactions(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  };
 
   const addTransaction = (transactionData) => {
     setLoading(true);
@@ -55,51 +43,36 @@ export function useTransactions() {
   const editTransaction = (transactionId, transactionData) => {
     setLoading(true);
     return updateTransaction(transactionId, transactionData)
-      .then((updatedTransaction) => {
-        setTransactions((prev) =>
-          prev.map((transaction) =>
-            transaction.id === transactionId ? updatedTransaction : transaction
-          )
-        );
-
-        return updatedTransaction;
-      })
-      .catch((err) => {
-        console.error(err);
-        throw err;
-      })
+      .then(() => fetchTransactions())
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
 
   const removeTransaction = (transactionId) => {
     setLoading(true);
     return deleteTransaction(transactionId)
-      .then(() => {
-        setTransactions((prev) =>
-          prev.filter((transaction) => transaction.id !== transactionId)
-        );
-      })
-      .catch((err) => {
-        console.error(err);
-        throw err;
-      })
+      .then(() => fetchTransactions())
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
 
-  // const filteredTransactions = transactions.filter((transaction) =>
-  //   isWithinRange(transaction.date)
-  // );
+  const nextMonth = () => {
+    setSelectedDate((prev) => addMonths(prev, 1));
+  };
+
+  const prevMonth = () => {
+    setSelectedDate((prev) => subMonths(prev, 1));
+  };
 
   return {
     transactions,
     loading,
+    nextMonth,
+    prevMonth,
+    selectedDate,
     addTransaction,
     editTransaction,
     removeTransaction,
     refreshTransactions: fetchTransactions,
-    goToPreviousMonth,
-    goToNextMonth,
-    resetToCurrentMonth,
-    dateRange,
   };
 }

@@ -1,9 +1,9 @@
 export const getDisposableIncome = (data) =>
   data.reduce((acc, cur) => {
     if (cur.type === 'income') {
-      acc += cur.amount;
+      acc += Number(cur.amount);
     } else {
-      acc -= cur.amount;
+      acc -= Number(cur.amount);
     }
     return acc;
   }, 0);

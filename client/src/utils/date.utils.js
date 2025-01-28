@@ -17,7 +17,7 @@ export const getMonthRange = (selectedDate) => {
   const date = new Date(selectedDate);
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  return { startDate: firstDay, endDate: lastDay };
+  return [firstDay, lastDay];
 };
 
 export const getWeekRange = (selectedDate) => {

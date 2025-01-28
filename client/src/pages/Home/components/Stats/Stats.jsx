@@ -2,13 +2,9 @@ import React from 'react';
 import Chart from './Chart';
 import Categories from './Categories';
 import Category from './Category';
-import { useTransactions } from '../../../../hooks/useTransactions.js';
-
 import { getDisposableIncome } from '../../../../utils/transactions.utils';
 
-export default function Stats() {
-  const { transactions } = useTransactions();
-
+export default function Stats({ transactions }) {
   return (
     <article className='stats'>
       <h1>Disposable income: {getDisposableIncome(transactions)}</h1>
