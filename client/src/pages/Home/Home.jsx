@@ -4,10 +4,25 @@ import Transactions from './components/Transactions/Transactions.jsx';
 import Stats from './components/Stats/Stats.jsx';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
+import { useDate } from '../../hooks/useDate.js';
+import { getMonth } from '../../utils/date.utils.js';
 import './Home.scss';
+import TimeSelector from './components/TimeFilter/TimeSelector.jsx';
+import Filter from './components/TimeFilter/Filter.jsx';
 
 export default function Home() {
   const { user } = useAuth();
+  const {
+    currentDate,
+    // dateRange,
+    // updateSelectedDate,
+    // setMonthRange,
+    // setWeekRange,
+    // setBiWeeklyRange,
+    // isWithinRange,
+    // checkIsWithinRange,
+  } = useDate();
+
   const navigate = useNavigate();
   if (!user) {
     navigate('/welcome');
@@ -15,7 +30,11 @@ export default function Home() {
 
   return (
     <main className='home'>
-      <TimeFilter />
+      <section className='time-filter'>
+        <TimeSelector currentDate={currentDate} />
+        <Filter />
+      </section>
+
       <section className='dashboard'>
         <Transactions />
         <Stats />
