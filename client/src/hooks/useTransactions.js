@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useDate } from '../../hooks/useDate';
+import { useAuth } from './useAuth';
+import { useDate } from './useDate';
 import {
   // getAllTransactions,
   getUserTransactions,
   createTransaction,
   updateTransaction,
   deleteTransaction,
-} from '../../api/transactions';
+} from '../api/transactions';
 
 export function useTransactions() {
   const [transactions, setTransactions] = useState([]);
@@ -25,6 +25,7 @@ export function useTransactions() {
     setLoading(true);
     return getUserTransactions(user.uid)
       .then((data) => {
+        console.log(data);
         setTransactions(data);
         console.log(transactions);
       })
@@ -46,15 +47,8 @@ export function useTransactions() {
   const addTransaction = (transactionData) => {
     setLoading(true);
     return createTransaction(user.uid, transactionData)
-      .then((newTransaction) => {
-        setTransactions((prev) => [...prev, newTransaction]);
-
-        return newTransaction;
-      })
-      .catch((err) => {
-        console.error(err);
-        throw err;
-      })
+      .then(() => fetchTransactions())
+      .catch((err) => err)
       .finally(() => setLoading(false));
   };
 
@@ -92,12 +86,12 @@ export function useTransactions() {
       .finally(() => setLoading(false));
   };
 
-  const filteredTransactions = transactions.filter((transaction) =>
-    isWithinRange(transaction.date)
-  );
+  // const filteredTransactions = transactions.filter((transaction) =>
+  //   isWithinRange(transaction.date)
+  // );
 
   return {
-    transactions: filteredTransactions,
+    transactions,
     loading,
     addTransaction,
     editTransaction,

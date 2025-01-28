@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createUser } from '../api/users';
+import toast from 'react-hot-toast';
 import {
   firebaseSignIn,
   firebaseSignUp,
@@ -34,7 +35,9 @@ export function useAuth() {
       const cred = await firebaseSignIn(email, password);
       if (!cred.emailVerified) {
         await firebaseSignOut();
-        alert('Please verify your email before signing in.');
+        toast.error('Please verify your email before signing in.', {
+          duration: 3000,
+        });
         return { success: false, error: 'Email not verified' };
       } else {
         setUser(cred);

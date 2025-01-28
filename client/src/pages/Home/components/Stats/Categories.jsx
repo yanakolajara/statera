@@ -1,5 +1,6 @@
 import React from 'react';
-import { useTransactions } from '../../useTransactions';
+import { useTransactions } from '../../../../hooks/useTransactions.js';
+
 import { calculateTotal } from '../../../../utils/math.utils';
 import { filterByKey } from '../../../../utils/filter.utils';
 import Loading from '../../../../components/ui/Loading';

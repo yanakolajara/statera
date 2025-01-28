@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { useTransactions } from '../../useTransactions';
+import { useTransactions } from '../../../../hooks/useTransactions.js';
+
 import Loading from '../../../../components/ui/Loading';
 import { CATEGORY_COLORS } from '../../../../constants/categories';
 
@@ -42,15 +43,15 @@ export default function Chart() {
             fontWeight: 500,
             textBorderColor: 'transparent',
             backgroundColor: 'transparent',
-            textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+            textShadow: '0 1px 2px rgba(0,0,0,0.2)',
           },
           labelLine: {
             length: 15,
             length2: 30,
             maxSurfaceAngle: 80,
             lineStyle: {
-              color: '#666666'
-            }
+              color: '#666666',
+            },
           },
           data: transactions.map((item) => ({
             value: item.amount,
@@ -87,7 +88,7 @@ export default function Chart() {
         width: '100%',
         height: '400px',
         minWidth: '600px', // Increased minimum width
-        padding: '20px 40px' // Added padding for label space
+        padding: '20px 40px', // Added padding for label space
       }}
       className='chart-pie'
     />

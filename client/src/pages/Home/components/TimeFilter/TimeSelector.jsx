@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { format } from 'date-fns';
 
 export default function TimeSelector({
@@ -17,6 +17,11 @@ export default function TimeSelector({
       moveDateNext();
     }
   };
+
+  useEffect(() => {
+    console.log('CURRENT DATE', currentDate);
+  }, [currentDate]);
+
   return (
     <section className='time-selector'>
       <button name='move-prev' className='time-btn' onClick={handleClick}>
