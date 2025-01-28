@@ -21,6 +21,8 @@ export default function Home() {
     // setBiWeeklyRange,
     // isWithinRange,
     // checkIsWithinRange,
+    moveDatePrev,
+    moveDateNext,
   } = useDate();
 
   const navigate = useNavigate();
@@ -31,7 +33,11 @@ export default function Home() {
   return (
     <main className='home'>
       <section className='time-filter'>
-        <TimeSelector currentDate={currentDate} />
+        <TimeSelector
+          currentDate={currentDate}
+          moveDatePrev={moveDatePrev}
+          moveDateNext={moveDateNext}
+        />
         <Filter />
       </section>
 

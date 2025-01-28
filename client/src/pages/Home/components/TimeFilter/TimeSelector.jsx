@@ -1,12 +1,31 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-export default function TimeSelector({ currentDate }) {
+export default function TimeSelector({
+  currentDate,
+  moveDatePrev,
+  moveDateNext,
+}) {
+  const handleClick = (e) => {
+    const { name } = e.target;
+    console.log(name);
+    if (name === 'move-prev') {
+      console.log('BACK');
+      moveDatePrev();
+    } else {
+      console.log('NEXT');
+      moveDateNext();
+    }
+  };
   return (
     <section className='time-selector'>
-      <button className='time-btn'>⬅️</button>
+      <button name='move-prev' className='time-btn' onClick={handleClick}>
+        ⬅️
+      </button>
       <h2>{format(currentDate, 'MMMM')}</h2>
-      <button className='time-btn'>➡️</button>
+      <button name='move-next' className='time-btn' onClick={handleClick}>
+        ➡️
+      </button>
     </section>
   );
 }
