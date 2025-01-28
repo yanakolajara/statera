@@ -59,7 +59,16 @@ router.get('/user/:userId/date-range', async (req, res) => {
 // Create a new transaction
 router.post('/:userId', async (req, res) => {
   const { userId } = req.params;
+  const user = await db.oneOrNone('SELECT * FROM users WHERE id=$1', [userId]);
+  if (!user) {
+    return res.status(404).json({ error: 'User does not exist' });
+  }
   const { amount, type, category, description, date } = req.body;
+  if (amount < 0 || !type || !category || !description) {
+    return res
+      .status(400)
+      .json({ error: 'Invalid or missing transaction fields' });
+  }
   try {
     const data = await db.one(
       'INSERT INTO transactions (user_id, amount, type, category, description, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',

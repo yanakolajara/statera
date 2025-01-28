@@ -15,14 +15,12 @@ router.get('/', async (req, res) => {
 // Get user by user_id
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
-  try {
-    const data = await db.oneOrNone('SELECT * FROM users WHERE id = $1', [
-      userId,
-    ]);
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  // 1) attempt to get user
+  const user = await db.oneOrNone('SELECT * FROM users WHERE id=$1', [userId]);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
   }
+  return res.status(200).json(user);
 });
 
 // Create a new user

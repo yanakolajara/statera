@@ -7,7 +7,9 @@
     "start": "nodemon server.js",
     "db:schema": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
-    "db:reset": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql"
+    "db:reset": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "keywords": [],
   "author": "Yanako Lajara",
@@ -22,6 +24,7 @@
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
+    "cypress": "^14.0.0",
     "nodemon": "^3.1.9"
   }
 }

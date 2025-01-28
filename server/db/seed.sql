@@ -3,7 +3,7 @@
 -- Insert Users
 INSERT INTO users (id, first_name, middle_name, last_name, dob, gender, email, phone)
 VALUES
-('firebase-uid-123', 'Yanako', '', 'Lajara', '1991-03-28', 'Male', 'yanakolajara@email.com', '1234567890'),
+('firebase-uid-123', 'Yanako', '', 'Lajara', '2003-05-12', 'Male', 'ynklaj0512@gmail.com', '5512623223'),
 ('firebase-uid-124', 'Alice', '', 'Smith', '1992-07-15', 'Female', 'alice.smith@email.com', '9876543210'),
 ('firebase-uid-125', 'John', 'A.', 'Doe', '1990-11-22', 'Male', 'john.doe@email.com', '1122334455'),
 ('firebase-uid-126', 'Emily', 'B.', 'Davis', '1995-05-30', 'Female', 'emily.davis@email.com', '5566778899'),
