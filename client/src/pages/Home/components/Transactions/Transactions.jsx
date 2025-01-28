@@ -13,7 +13,7 @@ export default function Transactions({
   return (
     <article className='transactions container'>
       <h2>Transactions</h2>
-      <Searchbar />
+      {/* <Searchbar /> */}
       <TransactionForm onSubmit={addTransaction} />
       <List
         isLoading={loading}

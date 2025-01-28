@@ -41,11 +41,7 @@ export default function TransactionForm(props) {
       className={`transaction__form ${onCancel ? 'edit' : 'create'}`}
       onSubmit={handleSubmit}
     >
-      {onCancel && (
-        <button type='button' onClick={onCancel}>
-          Cancel
-        </button>
-      )}
+      <label htmlFor=''>Description</label>
       <input
         type='text'
         name='description'
@@ -54,43 +50,61 @@ export default function TransactionForm(props) {
         placeholder='Add a description'
         required
       />
-      <input
-        type='number'
-        name='amount'
-        value={formData.amount}
-        onChange={handleChange}
-        placeholder='Amount'
-        required
-      />
-      <select
-        name='category'
-        value={formData.category}
-        onChange={handleChange}
-        required
-      >
-        {TRANSACTION_CATEGORIES.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-      <select
-        name='type'
-        value={formData.type}
-        onChange={handleChange}
-        required
-      >
-        <option value='income'>Income</option>
-        <option value='expense'>Expense</option>
-      </select>
-      <input
-        type='date'
-        name='date'
-        value={formData.date}
-        onChange={handleChange}
-        required
-      />
-      <input type='submit' value='submit' />
+
+      <div className='form-containers amount-type'>
+        <input
+          type='number'
+          name='amount'
+          value={formData.amount}
+          onChange={handleChange}
+          placeholder='Amount'
+          required
+        />
+        <select
+          name='type'
+          value={formData.type}
+          onChange={handleChange}
+          required
+        >
+          <option value='income'>Income</option>
+          <option value='expense'>Expense</option>
+        </select>
+      </div>
+      <div className='form-containers details'>
+        {' '}
+        <input
+          type='date'
+          name='date'
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
+        <select
+          name='category'
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          {TRANSACTION_CATEGORIES.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className='form-containers form-actions'>
+        {onCancel && (
+          <button
+            className='form-actions__btn'
+            type='button'
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        )}
+        <input className='form-actions__btn' type='submit' value='submit' />
+      </div>
     </form>
   );
 }

@@ -40,16 +40,75 @@
       width: 40%;
       gap: 10px;
       padding: 30px;
+
       .searchbar {
         margin-bottom: 30px;
       }
       .transaction__form {
-        height: 55px;
+        display: flex;
         padding: 10px;
+        gap: 5px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         border-radius: 15px;
         border: 1px solid var(--Grey, #4b4b4b);
         background: rgba(255, 255, 255, 0.03);
+
+        label {
+          align-self: stretch;
+          text-align: start;
+          padding: 0px 10px;
+        }
+
+        .form-containers {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          align-self: stretch;
+          align-self: stretch;
+          select {
+            width: 40%;
+          }
+        }
+
+        input[name='description'] {
+          width: 100%;
+        }
+
+        input {
+          border-radius: 10px;
+          border: 1px solid var(--Grey, #333);
+          background: linear-gradient(
+              0deg,
+              rgba(255, 255, 255, 0.11) 0%,
+              rgba(255, 255, 255, 0.11) 100%
+            ),
+            var(--Grey, #444444);
+          color: rgb(206, 206, 206);
+          padding: 5px 10px;
+        }
+
+        .form-actions {
+          display: flex;
+          padding: 10px;
+          &__btn {
+            width: 100%;
+          }
+          input[type='submit'] {
+            background-color: rgb(91, 196, 91);
+            color: #fff;
+
+            text-align: center;
+            text-shadow: 0px 0px 14px rgba(0, 0, 0, 0.352);
+            font-size: 15px;
+            font-style: normal;
+
+            line-height: normal;
+          }
+        }
       }
       .list {
         display: flex;
