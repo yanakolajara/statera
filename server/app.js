@@ -7,18 +7,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
-const whitelist = ['http://localhost:3000', 'https://statera-app.netlify.app'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log('🚀 ~ corsOptions.origin:', origin);
-
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
+// const whitelist = ['http://localhost:3000', 'https://statera-app.netlify.app'];
+var corsOptions = {
+  origin:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://statera-app.netlify.app',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
