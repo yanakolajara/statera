@@ -21,6 +21,7 @@ export function useTransactions() {
         console.log(transactions);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, selectedDate]);
 
   const fetchTransactions = () => {
