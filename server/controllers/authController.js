@@ -27,9 +27,13 @@ router.post('/register', async (req, res) => {
       phone,
     } = req.body;
 
-    const existingUser = await db.oneOrNone(
+    const existingEmail = await db.oneOrNone(
       'SELECT email FROM users WHERE email = $1',
       [email]
+    );
+    const existingPhone = await db.oneOrNone(
+      'SELECT phone FROM users WHERE phone = $1',
+      [phone]
     );
 
     const existingPending = await db.oneOrNone(
@@ -37,7 +41,7 @@ router.post('/register', async (req, res) => {
       [email]
     );
 
-    if (existingUser || existingPending) {
+    if (existingEmail || existingPhone || existingPending) {
       return res.status(400).json({
         success: false,
         error: 'Email already registered or pending verification',
