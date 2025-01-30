@@ -11,7 +11,7 @@ export default function Transactions({
   removeTransaction,
 }) {
   return (
-    <article className='transactions container'>
+    <article className='transactions'>
       <h2>Transactions</h2>
       {/* <Searchbar /> */}
       <TransactionForm onSubmit={addTransaction} />

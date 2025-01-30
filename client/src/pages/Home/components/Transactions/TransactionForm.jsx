@@ -1,5 +1,8 @@
 import React from 'react';
-import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
+import {
+  EXPENSES_CATEGORIES,
+  INCOME_CATEGORIES,
+} from '../../../../constants/categories';
 import { format } from 'date-fns';
 
 export default function TransactionForm(props) {
@@ -81,7 +84,10 @@ export default function TransactionForm(props) {
           onChange={handleChange}
           required
         >
-          {TRANSACTION_CATEGORIES.map((category) => (
+          {(formData.type === 'income'
+            ? INCOME_CATEGORIES
+            : EXPENSES_CATEGORIES
+          ).map((category) => (
             <option key={category} value={category}>
               {category}
             </option>

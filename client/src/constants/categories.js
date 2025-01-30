@@ -1,4 +1,4 @@
-export const TRANSACTION_CATEGORIES = [
+export const EXPENSES_CATEGORIES = [
   'Housing',
   'Transportation',
   'Food',
@@ -10,6 +10,21 @@ export const TRANSACTION_CATEGORIES = [
   'Debt Payments',
   'Savings/Investments',
   'Miscellaneous',
+];
+
+export const INCOME_CATEGORIES = [
+  'Salary',
+  'Freelance Work',
+  'Business Revenue',
+  'Investments',
+  'Dividends',
+  'Gifts',
+  'Bonuses',
+  'Rental Income',
+  'Government Assistance',
+  'Side Hustle',
+  'Refunds/Reimbursements',
+  'Miscellaneous Income',
 ];
 
 export const CATEGORY_COLORS = {

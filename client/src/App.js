@@ -8,7 +8,6 @@ import Loading from './components/ui/Loading.jsx';
 import { useAuth } from './hooks/useAuth.js';
 import './App.scss';
 import './styles.scss';
-
 function App() {
   const { loading } = useAuth();
   if (loading) {
