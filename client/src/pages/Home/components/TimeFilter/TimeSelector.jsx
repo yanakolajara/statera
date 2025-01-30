@@ -16,7 +16,7 @@ export default function TimeSelector({ selectedDate, prevMonth, nextMonth }) {
         onClick={prevMonth}
         style={{ width: '50px', height: '50px' }}
       >
-        <ArrowPrev style={{ width: '100%', height: '100%' }} />
+        <ArrowPrev style={{ width: '100%', height: '100%', padding: '0' }} />
       </button>
       <h2>{format(selectedDate, 'MMMM')}</h2>
       <button
@@ -25,7 +25,7 @@ export default function TimeSelector({ selectedDate, prevMonth, nextMonth }) {
         onClick={nextMonth}
         style={{ width: '50px', height: '50px' }}
       >
-        <ArrowNext style={{ width: '100%', height: '100%' }} />
+        <ArrowNext style={{ width: '100%', height: '100%', padding: '0' }} />
       </button>
     </section>
   );

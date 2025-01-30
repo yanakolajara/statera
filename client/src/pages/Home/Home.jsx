@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import './Home.scss';
 import TimeSelector from './components/TimeFilter/TimeSelector.jsx';
 import { useTransactions } from '../../hooks/useTransactions.js';
+import { getDisposableIncome } from '../../utils/transactions.utils.js';
 
 export default function Home() {
   const { user } = useAuth();
@@ -25,6 +26,8 @@ export default function Home() {
     navigate('/welcome');
   }
 
+  const disposable = getDisposableIncome(transactions);
+
   return (
     <main className='home'>
       <section className='time-filter'>
@@ -33,6 +36,16 @@ export default function Home() {
           prevMonth={prevMonth}
           nextMonth={nextMonth}
         />
+
+        <div className='disposable-income-container'>
+          <h2
+            className='amount'
+            style={{ color: disposable > -1 ? '#96DA4D' : '#FD4E4E' }}
+          >
+            ${disposable}
+          </h2>
+          <h3 className='title'>Disposable income </h3>
+        </div>
         {/* <Filter /> */}
       </section>
 
