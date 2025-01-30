@@ -10,13 +10,15 @@ app.use(express.json());
 const whitelist = ['http://localhost:3000', 'https://statera-app.netlify.app'];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
+    console.log('🚀 ~ corsOptions.origin:', origin);
+
+    if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.log('origin:', origin, 'not allowed');
       callback(new Error('Not allowed by CORS'));
     }
   },
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
