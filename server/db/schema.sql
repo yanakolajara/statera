@@ -24,7 +24,7 @@ CREATE TABLE users (
 -- Create the `transactions` table
 CREATE TABLE transactions (
     id SERIAL PRIMARY KEY,
-    user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     amount NUMERIC(10, 2) NOT NULL,
     type VARCHAR(10) CHECK (type IN ('income', 'expense')) NOT NULL,
     category VARCHAR(50),
