@@ -125,7 +125,6 @@ router.post('/complete-enrollment', async (req, res) => {
 
     const query = `
   INSERT INTO users (
-    id, 
     first_name, 
     middle_name, 
     last_name, 
@@ -135,13 +134,12 @@ router.post('/complete-enrollment', async (req, res) => {
     phone,
     hashed_password
   ) VALUES (
-    $1, $2, $3, $4, $5, $6, $7, $8, $9
+    $1, $2, $3, $4, $5, $6, $7, $8
   )
   RETURNING *
 `;
 
     const updated = await db.one(query, [
-      code,
       pending.first_name,
       pending.middle_name,
       pending.last_name,
@@ -161,6 +159,7 @@ router.post('/complete-enrollment', async (req, res) => {
       message: 'Account successfully created. ',
       token: token,
       userData: {
+        id: updated.id,
         first_name: updated.first_name,
         middle_name: updated.middle_name,
         last_name: updated.last_name,
@@ -185,7 +184,7 @@ router.post('/login', async (req, res) => {
 
     const userData = await db.oneOrNone(
       `SELECT 
-        id, 
+        id
         email,
         first_name,
         middle_name,

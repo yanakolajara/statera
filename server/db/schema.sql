@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS pending_users;
 
 -- Create the `users` table
 CREATE TABLE users (
-    id TEXT PRIMARY KEY, 
+    id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     middle_name VARCHAR(50) DEFAULT NULL,
     last_name VARCHAR(50) NOT NULL,
