@@ -8,6 +8,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+app.use('/auth', require('./controllers/authController'));
 app.use('/users', require('./controllers/usersController'));
 app.use('/transactions', require('./controllers/transactionsController'));
 

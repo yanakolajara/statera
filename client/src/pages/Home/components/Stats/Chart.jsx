@@ -1,35 +1,36 @@
-//* source: https://echarts.apache.org/examples/en/editor.html?c=pie-simple
-
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-import { useTransactions } from '../../../../hooks/useTransactions.js';
-
-import Loading from '../../../../components/ui/Loading';
 import { CATEGORY_COLORS } from '../../../../constants/categories';
 
-export default function Chart() {
+export default function Chart({ expenses, loading }) {
   const chartRef = useRef(null);
-  const { transactions, loading } = useTransactions();
+  const myChartRef = useRef(null); // Store the chart instance
 
   useEffect(() => {
     if (loading) return;
 
     const chartDom = chartRef.current;
-    const myChart = echarts.init(chartDom);
+
+    // Check if chart already exists, reuse it
+    if (!myChartRef.current) {
+      myChartRef.current = echarts.init(chartDom);
+    }
+    const myChart = myChartRef.current;
 
     const option = {
       tooltip: {
         trigger: 'item',
       },
       color: Object.values(CATEGORY_COLORS),
-      animationDuration: 500,
-      animationEasing: 'cubicOut',
-      animationDurationUpdate: 300,
+      animationDuration: 500, // Initial load animation
+      animationDurationUpdate: 500, // Smooth transitions for updates
+      animationEasingUpdate: 'linear', // Smooth movement of sections
+      animationTypeUpdate: 'expansion', // Expands the sections instead of resetting
       series: [
         {
           name: 'Expenses',
           type: 'pie',
-          radius: ['0%', '65%'],
+          radius: ['0%', '100%'], // Full circle (no donut effect)
           center: ['50%', '50%'],
           label: {
             show: true,
@@ -53,7 +54,7 @@ export default function Chart() {
               color: '#666666',
             },
           },
-          data: transactions.map((item) => ({
+          data: expenses.map((item) => ({
             value: item.amount,
             name: item.category,
             itemStyle: {
@@ -64,22 +65,19 @@ export default function Chart() {
       ],
     };
 
+    // Update the chart without resetting everything
+    myChart.setOption(option, { notMerge: false, lazyUpdate: true });
+
     const handleResize = () => {
       myChart.resize();
     };
 
     window.addEventListener('resize', handleResize);
-    myChart.setOption(option);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      myChart.dispose();
     };
-  }, [transactions, loading]);
-
-  if (loading) {
-    return <Loading />;
-  }
+  }, [expenses, loading]);
 
   return (
     <div
@@ -87,8 +85,8 @@ export default function Chart() {
       style={{
         width: '100%',
         height: '400px',
-        minWidth: '600px', // Increased minimum width
-        padding: '20px 40px', // Added padding for label space
+        minWidth: '600px',
+        padding: '20px 40px',
       }}
       className='chart-pie'
     />

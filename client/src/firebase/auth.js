@@ -2,10 +2,6 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  // multiFactor,
-  // PhoneAuthProvider,
-  // PhoneMultiFactorGenerator,
-  // RecaptchaVerifier,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';

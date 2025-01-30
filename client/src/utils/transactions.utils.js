@@ -7,3 +7,7 @@ export const getDisposableIncome = (data) =>
     }
     return acc;
   }, 0);
+
+export const filterExpenses = (transactions) => {
+  return transactions.filter((transaction) => transaction.type === 'expense');
+};

@@ -1,18 +1,14 @@
 import React from 'react';
-import {
-  // formatDateToServer,
-  getDate,
-} from '../../../../utils/date.utils';
 import { TRANSACTION_CATEGORIES } from '../../../../constants/categories';
+import { format } from 'date-fns';
 
 export default function TransactionForm(props) {
-  console.log(props);
   const { transaction, onSubmit, onCancel } = props;
   const [formData, setFormData] = React.useState({
     description: transaction?.description || '',
     amount: transaction?.amount || '',
     type: transaction?.type || 'expense',
-    date: transaction?.date || getDate(), //FIXME: Default date not showing()
+    date: transaction?.date || format(new Date(), 'yyyy-MM-dd'),
     category: transaction?.category || 'Miscellaneous',
   });
 
@@ -31,7 +27,7 @@ export default function TransactionForm(props) {
       description: '',
       amount: '',
       type: 'expense',
-      date: '',
+      date: format(new Date(), 'yyyy-MM-dd'),
       category: 'Miscellaneous',
     });
   }

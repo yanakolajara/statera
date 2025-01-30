@@ -21,7 +21,7 @@ export function useTransactions() {
         console.log(transactions);
       });
     }
-  }, [user, selectedDate]); // Add selectedDate as dependency
+  }, [user, selectedDate]);
 
   const fetchTransactions = () => {
     setLoading(true);
@@ -29,7 +29,8 @@ export function useTransactions() {
     const dates = getMonthRange(selectedDate);
     const startDate = format(dates[0], 'yyyy-MM-dd');
     const endDate = format(dates[1], 'yyyy-MM-dd');
-    return getUserTransactions(user.uid, startDate, endDate)
+    console.log(user.id, startDate, endDate);
+    return getUserTransactions(user.id, startDate, endDate)
       .then((data) => setTransactions(data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
@@ -37,7 +38,9 @@ export function useTransactions() {
 
   const addTransaction = (transactionData) => {
     setLoading(true);
-    return createTransaction(user.uid, transactionData)
+    console.log(user.id);
+    console.log(transactionData);
+    return createTransaction(user.id, transactionData)
       .then(() => fetchTransactions())
       .catch((err) => err)
       .finally(() => setLoading(false));

@@ -12,13 +12,17 @@ export default function List(props) {
 
   return (
     <ul className='list' style={style}>
-      {transactionsData.map((transaction) => (
-        <Transaction
-          transaction={transaction}
-          editTransaction={editTransaction}
-          removeTransaction={removeTransaction}
-        />
-      ))}
+      {transactionsData.length ? (
+        transactionsData.map((transaction) => (
+          <Transaction
+            transaction={transaction}
+            editTransaction={editTransaction}
+            removeTransaction={removeTransaction}
+          />
+        ))
+      ) : (
+        <p className='no-transactions'>No transactions found for this month.</p>
+      )}
     </ul>
   );
 }

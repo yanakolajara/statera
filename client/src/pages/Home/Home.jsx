@@ -1,14 +1,10 @@
 import React from 'react';
-import TimeFilter from './components/TimeFilter/TimeFilter.jsx';
 import Transactions from './components/Transactions/Transactions.jsx';
 import Stats from './components/Stats/Stats.jsx';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
-import { useDate } from '../../hooks/useDate.js';
-import { getMonth } from '../../utils/date.utils.js';
 import './Home.scss';
 import TimeSelector from './components/TimeFilter/TimeSelector.jsx';
-import Filter from './components/TimeFilter/Filter.jsx';
 import { useTransactions } from '../../hooks/useTransactions.js';
 
 export default function Home() {
@@ -48,7 +44,7 @@ export default function Home() {
           editTransaction={editTransaction}
           removeTransaction={removeTransaction}
         />
-        <Stats transactions={transactions} />
+        <Stats transactions={transactions} loading={loading} />
       </section>
     </main>
   );

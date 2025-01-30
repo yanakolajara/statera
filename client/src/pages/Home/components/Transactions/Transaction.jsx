@@ -12,14 +12,7 @@ const style = {
 };
 export default function Transaction(props) {
   const { transaction, editTransaction, removeTransaction } = props;
-  const {
-    id,
-    amount,
-    type,
-    // category,
-    description,
-    date,
-  } = transaction;
+  const { id, amount, type, description, date } = transaction;
   const [isEditing, setIsEditing] = useState(false);
 
   return (

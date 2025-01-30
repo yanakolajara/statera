@@ -5,27 +5,27 @@
   padding: 30px;
   margin: 0px;
   align-items: center;
-  .time-filter {
+  .time-selector {
     display: flex;
-    flex-direction: column;
-    padding: 0px 47px;
+    flex-direction: row;
     align-items: center;
-    gap: 14px;
-    .time-selector {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      h2 {
-        color: #fff;
-        text-align: center;
-        font-size: 40px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-      }
+    justify-content: space-between;
+    gap: 30px;
+    width: 350px;
+
+    h2 {
+      color: #fff;
+      text-align: center;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      padding: 0px;
     }
-    .filter {
-      display: flex;
+    button {
+      background: 0;
+      border: 0;
+      padding: 0;
     }
   }
   .dashboard {
@@ -115,7 +115,30 @@
         padding: 0px 1px;
         flex-direction: column;
         align-items: center;
-        gap: 0px;
+        gap: 10px;
+        max-height: calc(65vh - 200px);
+        overflow-y: auto;
+        width: 100%;
+
+        /* Styling the scrollbar */
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #4b4b4b;
+          border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: #606060;
+        }
+
         .transaction {
           display: flex;
           height: 92px;
@@ -202,9 +225,9 @@
     .stats {
       display: grid;
       width: fit-content;
-      min-width: 600px; // Increased to match chart
+      min-width: 600px;
       grid-template-rows: 1fr 1fr;
-      padding: 15px 40px; // Added horizontal padding
+      padding: 15px 40px;
       gap: 10px;
       overflow: visible;
 
@@ -222,12 +245,12 @@
 
         .category {
           display: flex;
-          width: 200px; // Fixed width for each category
-          height: 50px; // Fixed height for each category
+          width: auto;
+          height: 50px;
           padding: 10px;
           align-items: center;
           gap: 13px;
-          flex: 0 0 auto; // Prevent stretching
+          flex: 0 0 auto;
           border-radius: 8px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid var(--Grey, #4b4b4b);
