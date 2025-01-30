@@ -108,21 +108,28 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/complete-enrollment', async (req, res) => {
+  console.log('=== Complete Enrollment Started ===');
+  console.log('Request body:', req.body);
   try {
     const { email, code } = req.body;
+    console.log('Extracted data:', { email, code });
 
+    console.log('Querying pending user...');
     const pending = await db.oneOrNone(
       'SELECT * FROM pending_users WHERE email = $1',
       [email]
     );
+    console.log('Pending user query result:', pending);
 
     if (!pending) {
+      console.log('No pending registration found for email:', email);
       return res.status(404).json({
         success: false,
         error: 'There is no pending registration with that email.',
       });
     }
 
+    console.log('Preparing user insertion query...');
     const query = `
   INSERT INTO users (
     first_name, 
@@ -139,6 +146,7 @@ router.post('/complete-enrollment', async (req, res) => {
   RETURNING *
 `;
 
+    console.log('Inserting new user into database...');
     const updated = await db.one(query, [
       pending.first_name,
       pending.middle_name,
@@ -149,12 +157,16 @@ router.post('/complete-enrollment', async (req, res) => {
       pending.phone,
       pending.hashed_password,
     ]);
+    console.log('User successfully inserted:', { userId: updated.id });
 
+    console.log('Generating JWT token...');
     const token = jwt.sign({ user_id: code }, 'SECRET_KEY_EXAMPLE', {
       expiresIn: '1d',
     });
+    console.log('JWT token generated successfully');
 
-    res.status(202).json({
+    console.log('Preparing response data...');
+    const responseData = {
       success: true,
       message: 'Account successfully created. ',
       token: token,
@@ -168,9 +180,17 @@ router.post('/complete-enrollment', async (req, res) => {
         email: updated.email,
         phone: updated.phone,
       },
+    };
+    console.log('Response data prepared:', {
+      userId: responseData.userData.id,
     });
+
+    res.status(202).json(responseData);
+    console.log('=== Complete Enrollment Finished Successfully ===');
   } catch (error) {
-    console.error('Error en /complete-enrollment:', error);
+    console.error('=== Complete Enrollment Error ===');
+    console.error('Error details:', error);
+    console.error('Stack trace:', error.stack);
     res.status(500).json({
       success: false,
       error: 'Error completing the enrollment.',
